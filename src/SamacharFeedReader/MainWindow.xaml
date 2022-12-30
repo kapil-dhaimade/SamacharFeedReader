@@ -1,0 +1,48 @@
+﻿<Window
+  x:Class="SamacharFeedReader.MainWindow"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:commands="clr-namespace:SamacharFeedReader.Commands"
+  xmlns:tb="http://www.hardcodet.net/taskbar"
+    Visibility="Hidden">
+
+    <tb:TaskbarIcon x:Name="myNotifyIcon"
+                    Visibility="Visible"
+                    IconSource="DD_Logo.ico"
+                    MenuActivation="LeftOrRightClick"
+                    DoubleClickCommand="{commands:ShowAllCommand}"
+                    ToolTipText="Samachar Feed Reader"
+                    
+      >
+        <tb:TaskbarIcon.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Show All" Click="ShowAll_Clicked"></MenuItem>
+                <MenuItem Header="Manage Feeds..." Click="ManageFeeds_Clicked">
+                </MenuItem>
+
+                <!--Command="{commands:ShowSampleWindowCommand}"
+                              CommandParameter="{Binding}"-->
+
+                <MenuItem Header="Quit" Command="{commands:QuitCommand}"
+                              CommandParameter="{Binding}">
+                    
+                </MenuItem>
+            </ContextMenu>
+        </tb:TaskbarIcon.ContextMenu>
+
+    </tb:TaskbarIcon>
+    <!--
+                    TrayPopup="{StaticResoure TrayStatusPopup}" ContextMenu="{StaticResource TrayMenu}" TrayToolTip="{StaticResource TrayToolTip}"-->
+
+</Window>
+    
+    <!--Window x:Class="SamacharFeedReader.MainWindow"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:SamacharFeedReader"
+    mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800">
+   <Grid>
+   </Grid></Window-->
