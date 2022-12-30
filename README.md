@@ -8,5 +8,5 @@ Screenshots:
 ![Tray Icon](/screenshots/TrayIcon.JPG)  
 Tray Icon
 
-![Show All Feeds Window](/screenshots/ShowAllFeedsWindow.JPG)
-Show All Feeds Window
+![All Feeds Window](/screenshots/ShowAllFeedsWindow.JPG)
+All Feeds Window
