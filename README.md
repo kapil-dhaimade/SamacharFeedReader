@@ -1,6 +1,6 @@
---------Samachar Feed Reader--------
+# Samachar Feed Reader
 
-Description: Samachar Feed Reader is a simple, free and open-source RSS and Atom feed reader created in .NET Framework. It is a Windows desktop application which runs as a system tray app and shows dialog to notify of new feeds.
+Samachar Feed Reader is a simple, free and open-source RSS and Atom feed reader created in .NET Framework. It is a Windows desktop application which runs as a system tray app and shows dialog to notify of new feeds.
 
 Software Requirements:
 	1. Microsoft .NET Framework 4.5.1
