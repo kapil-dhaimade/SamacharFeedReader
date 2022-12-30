@@ -53,15 +53,21 @@ namespace SamacharFeedReader
 
             mFeedReadTask = Task.Run(async () =>
             {
-                await feedFetchTask.run();
-                await Task.Delay(millisecDelayForNextFeedRead, quitTokenSrc.Token);
+                while (quitTokenSrc.Token.IsCancellationRequested == false)
+                {
+                    await feedFetchTask.run();
+                    await Task.Delay(millisecDelayForNextFeedRead, quitTokenSrc.Token);
+                }
             }, quitTokenSrc.Token);
 
             mFeedCleanupTask = Task.Run(async () =>
             {
-                await downloadedFeeds.cleanupFeeds();
-                downloadedFeeds.Serialize();
-                await Task.Delay(millisecDelayForNextFeedCleanup, quitTokenSrc.Token);
+                while (quitTokenSrc.Token.IsCancellationRequested == false)
+                {
+                    await downloadedFeeds.cleanupFeeds();
+                    downloadedFeeds.Serialize();
+                    await Task.Delay(millisecDelayForNextFeedCleanup, quitTokenSrc.Token);
+                }
             }, quitTokenSrc.Token);
         }
 
