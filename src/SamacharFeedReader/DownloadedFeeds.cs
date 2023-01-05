@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -44,7 +45,14 @@ namespace SamacharFeedReader
     public class DownloadedFeeds : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private int numOfDaysOldEntriesToCleanup = 30;
+        private int numOfDaysOldEntriesToCleanup;
+
+        public DownloadedFeeds()
+        {
+            numOfDaysOldEntriesToCleanup = int.Parse(
+                ConfigurationManager.AppSettings["numOfDaysOldEntriesToCleanup"] ?? "30");
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
