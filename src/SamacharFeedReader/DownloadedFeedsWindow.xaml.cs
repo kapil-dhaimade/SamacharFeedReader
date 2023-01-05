@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SamacharFeedReader
 {
@@ -26,10 +18,10 @@ namespace SamacharFeedReader
             DataContext = downloadedFeeds;
         }
 
-        private void ContentControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ListViewItem_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             System.Diagnostics.Process.Start(
-                ((DownloadedFeedItem)((ContentControl)sender).DataContext).Link);
+                ((DownloadedFeedItem)((System.Windows.Controls.ListViewItem)sender).DataContext).Link);
         }
 
         public void showActivated()
@@ -75,10 +67,10 @@ namespace SamacharFeedReader
             if (delta < 2 * MINUTE)
                 return "a minute ago";
 
-            if (delta < 45 * MINUTE)
+            if (delta < 60 * MINUTE)
                 return ts.Minutes + " minutes ago";
 
-            if (delta < 90 * MINUTE)
+            if (delta < 120 * MINUTE)
                 return "an hour ago";
 
             if (delta < 24 * HOUR)

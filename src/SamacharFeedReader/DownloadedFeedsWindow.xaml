@@ -24,10 +24,25 @@
         </Grid.ColumnDefinitions>
         <StackPanel HorizontalAlignment="Center" Grid.Row="0" Grid.Column="0" 
                     Orientation="Horizontal">
-            <Image Source="DD_Logo.png" Width="50" Height="50"/>
-            <TextBlock Text=" Feeds" FontWeight="ExtraBold" FontSize="32"/>
+            <Image Source="DD_Logo.png" Width="40" Height="40"/>
+            <TextBlock Text=" Feeds" FontWeight="ExtraBold" FontSize="28"/>
         </StackPanel>
-        <ListView Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DownloadedFeedItemList}">
+        <!--StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="0">
+            <TextBlock Text="Filters: "/>
+            <ComboBox>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox IsChecked="{Binding IsSelected}"
+                           Width="20" Checked="Filter_Checked" />
+                            <TextBlock Text="{Binding FeedSourceName}"
+                           Width="200" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel-->
+        <ListView Name="feedsListView" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding DownloadedFeedItemList}">
             <d:ListView.ItemsSource>
                 <x:Array Type="{x:Type models:DownloadedFeedItem}">
                     <models:DownloadedFeedItem FeedName="Jenkins" Title="Build succeeded" PublishedDate="{x:Static sys:DateTime.Now}" Link="abc" NewEntry="True"/>
@@ -38,12 +53,12 @@
                     <Setter Property="Background" Value="AliceBlue" />
                     <Setter Property="Margin" Value="0,0,0,7"/>
                     <Setter Property="Padding" Value="7"/>
+                    <EventSetter Event="MouseLeftButtonUp" Handler="ListViewItem_MouseLeftButtonUp"/>
                 </Style>
             </ListView.Resources>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ContentControl MouseLeftButtonUp="ContentControl_MouseLeftButtonUp"
-                                    Padding="50">
+                    <ContentControl Padding="50">
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontWeight="Light" FontSize="13" Foreground="SlateGray"
