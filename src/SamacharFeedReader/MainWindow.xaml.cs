@@ -35,6 +35,7 @@ namespace SamacharFeedReader
         int millisecDelayForNextFeedCleanup = 60 * 60 * 1000;
         DownloadedFeeds downloadedFeeds = null;
         public DownloadedFeedsWindow downloadedFeedsWnd = null;
+        private bool dndEnabled = false;
         public MainWindow()
         {
             //NOTE: Needed because working dir is system32 when launched as startup item.
@@ -46,12 +47,22 @@ namespace SamacharFeedReader
 
             InitializeComponent();
 
+            dndEnabled = bool.Parse(ConfigurationManager.AppSettings["DnDEnabled"] ?? false.ToString());
+            if (dndEnabled)
+            {
+                ToggleDnDMenuItem.Header = "Disable DnD";
+            }
+            else
+            {
+                ToggleDnDMenuItem.Header = "Do not Disturb";
+            }
+
             setAsStartupItemIfUserChooses();
 
             downloadedFeedsWnd = new DownloadedFeedsWindow(downloadedFeeds);
             feedFetchTask = new FeedFetcher(downloadedFeeds, downloadedFeedsWnd);
             millisecDelayForNextFeedRead = 
-                int.Parse(ConfigurationManager.AppSettings["feedFetchIntervalMins"] ?? (15 * 60 * 1000).ToString());
+                int.Parse(ConfigurationManager.AppSettings["feedFetchIntervalMins"] ?? 15.ToString()) * 60 * 1000;
             if(ConfigurationManager.AppSettings["feedFetchIntervalMins"] == null)
             {
                 AddOrUpdateAppSettings("feedFetchIntervalMins",
@@ -188,6 +199,20 @@ namespace SamacharFeedReader
             var appPath = Assembly.GetEntryAssembly().Location;
             var fileInfo = new FileInfo(Assembly.GetEntryAssembly().Location);
             Directory.SetCurrentDirectory(fileInfo.Directory.FullName);
+        }
+
+        private void ToggleDnD_Clicked(object sender, RoutedEventArgs e)
+        {
+            dndEnabled = !dndEnabled;
+            AddOrUpdateAppSettings("DnDEnabled", dndEnabled.ToString());
+            if (dndEnabled)
+            {
+                ToggleDnDMenuItem.Header = "Disable DnD";
+            }
+            else
+            {
+                ToggleDnDMenuItem.Header = "Do not Disturb";
+            }
         }
     }
 }

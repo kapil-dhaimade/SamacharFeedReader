@@ -22,6 +22,7 @@
 
                 <!--Command="{commands:ShowSampleWindowCommand}"
                               CommandParameter="{Binding}"-->
+                <MenuItem Name="ToggleDnDMenuItem" Header="Do not Disturb" Click="ToggleDnD_Clicked"></MenuItem>
 
                 <MenuItem Header="Quit" Command="{commands:QuitCommand}"
                               CommandParameter="{Binding}">

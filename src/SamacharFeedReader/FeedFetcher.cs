@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -68,10 +69,13 @@ namespace SamacharFeedReader
 
             if (downloadedFeeds.isAnyNewEntryPresent())
             {
-                await System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                if (bool.Parse(ConfigurationManager.AppSettings["DnDEnabled"] ?? false.ToString()) == false)
                 {
-                    downloadedFeedsWnd.showActivated();
-                }));
+                    await System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        downloadedFeedsWnd.showActivated();
+                    }));
+                }
             }
             downloadedFeeds.Serialize();
         }
